@@ -41,10 +41,5 @@ def split_data(x, y, tr_frac=0.6):
     assert (n_tr == tr_idx.size)
     assert (n_ts == ts_idx.size)
 
-    xtr = x[tr_idx, :]
-    ytr = y[tr_idx]
-    xts = x[ts_idx, :]
-    yts = y[ts_idx]
-    return xtr, ytr, xts, yts
 
-  
+
