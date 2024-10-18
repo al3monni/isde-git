@@ -27,7 +27,7 @@ def load_data(filename):
     return x, y
 
 
-def split_data(x, y, tr_frac=0.6):
+def split_data(x, y, tr_fraction=0.6):
     n_samples = x.shape[0]
 
     n_tr = int(tr_frac * n_samples)
