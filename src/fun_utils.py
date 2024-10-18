@@ -27,11 +27,10 @@ def load_data(filename):
     return x, y
 
 
-def split_data(x, y, tr_fraction=0.5):
-
+def split_data(x, y, tr_frac=0.6):
     n_samples = x.shape[0]
 
-    n_tr = int(tr_fraction * n_samples)
+    n_tr = int(tr_frac * n_samples)
     n_ts = n_samples - n_tr
 
     idx = np.linspace(0, n_samples, num=n_samples, endpoint=False, dtype='int')
@@ -42,5 +41,8 @@ def split_data(x, y, tr_fraction=0.5):
     assert (n_tr == tr_idx.size)
     assert (n_ts == ts_idx.size)
 
-
-
+    xtr = x[tr_idx, :]
+    ytr = y[tr_idx]
+    xts = x[ts_idx, :]
+    yts = y[ts_idx]
+    return xtr, ytr, xts, yts
