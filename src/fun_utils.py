@@ -1,3 +1,4 @@
+
 import numpy as np
 from pandas import read_csv
 
@@ -28,3 +29,4 @@ def split_data(x, y, tr_fraction=0.5):
     xts = x[ts_idx, :]
     yts = y[ts_idx]
     return xtr, ytr, xts, yts
+
