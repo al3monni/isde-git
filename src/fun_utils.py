@@ -4,22 +4,6 @@ from pandas import read_csv
 
 
 def load_data(filename):
-    """
-    Load data from a csv file
-
-    Parameters
-    ----------
-    filename : string
-        Filename to be loaded.
-
-    Returns
-    -------
-    X : ndarray
-        the data matrix.
-
-    y : ndarray
-        the labels of each sample.
-    """
     data = read_csv(filename)
     z = np.array(data)
     y = z[:, 0]
@@ -27,7 +11,7 @@ def load_data(filename):
     return x, y
 
 
-def split_data(x, y, tr_fraction=0.6):
+def split_data(x, y, tr_fraction=0.5):
     n_samples = x.shape[0]
 
     n_tr = int(tr_frac * n_samples)
