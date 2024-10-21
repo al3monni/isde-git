@@ -1,9 +1,5 @@
 import numpy as np
 from sklearn.metrics.pairwise import euclidean_distances
-from sklearn.metrics import pairwise_distances
-import pandas as pd
-from matplotlib import pyplot as plt
-
 
 class NMC(object):
     """
@@ -34,8 +30,8 @@ class NMC(object):
         return self._centroids
 
     @property
-    def class_labels(self):
-        return self._class_labels
+    def _classes(self):
+        return self._classes
 
     def predict(self, Xts):
         """
@@ -60,12 +56,12 @@ class NMC(object):
 
     def fit(self, xtr, ytr):
         n_dim = xtr.shape[1]
-        self._class_labels = np.unique(ytr)  # etichette uniche
-        n_classes = self._class_labels.size  # numero di classi
+        self._classes = np.unique(ytr)  # etichette uniche
+        n_classes = self._classes.size  # numero di classi
     
         # Inizializziamo i centroidi con zeri
         self._centroids = np.zeros(shape=(n_classes, n_dim))
     
         # Calcoliamo il centroide per ogni classe
-        for idx, label in enumerate(self._class_labels):
+        for idx, label in enumerate(self._classes):
             self._centroids[idx, :] = np.mean(xtr[ytr == label, :], axis=0)
