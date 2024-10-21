@@ -1,5 +1,4 @@
 import numpy as np
-
 from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.metrics import pairwise_distances
 import pandas as pd
@@ -38,7 +37,7 @@ class NMC(object):
     def class_labels(self):
         return self._class_labels
 
-    def predict(self, xts):
+    def predict(self, Xts):
         """
 
         Parameters
@@ -50,13 +49,14 @@ class NMC(object):
         predicted_label --> actually the predicted label for the given data
 
         """
-        if self._centroids is None:  # the classifier is not trained
-            raise ValueError("Train classifier first!")
 
-        dist = pairwise_distances(xts, self._centroids)
-        y_pred = np.argmin(dist, axis=1)
+        if self._centroids is None:
+            raise ValueError("The classifier is not trained. Call fit!")
 
-        return y_pred
+        dist_euclidean = euclidean_distances(Xts, self._centroids)
+        idx_min = np.argmin(dist_euclidean, axis=1)
+        yc = self._classes[idx_min]
+        return yc
 
     def fit(self, xtr, ytr):
         n_dim = xtr.shape[1]
