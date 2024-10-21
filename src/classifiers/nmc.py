@@ -27,7 +27,7 @@ class NMC(object):
 
     def __init__(self):
         self._centroids = None
-        self._class_labels = None  # class labels may not be contiguous indices
+        self._classes = None  # class labels may not be contiguous
 
     @property
     def centroids(self):
