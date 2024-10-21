@@ -23,15 +23,15 @@ class NMC(object):
 
     def __init__(self):
         self._centroids = None
-        self._classes = None  # class labels may not be contiguous
+        self._class_labels = None  # class labels may not be contiguous
 
     @property
     def centroids(self):
         return self._centroids
 
     @property
-    def _classes(self):
-        return self._classes
+    def _class_labels(self):
+        return self._class_labels
 
     def predict(self, Xts):
         """
@@ -51,17 +51,17 @@ class NMC(object):
 
         dist_euclidean = euclidean_distances(Xts, self._centroids)
         idx_min = np.argmin(dist_euclidean, axis=1)
-        yc = self._classes[idx_min]
+        yc = self._class_labels[idx_min]
         return yc
 
     def fit(self, xtr, ytr):
         n_dim = xtr.shape[1]
-        self._classes = np.unique(ytr)  # etichette uniche
-        n_classes = self._classes.size  # numero di classi
+        self._class_labels = np.unique(ytr)  # etichette uniche
+        n_classes = self._class_labels.size  # numero di classi
     
         # Inizializziamo i centroidi con zeri
         self._centroids = np.zeros(shape=(n_classes, n_dim))
     
         # Calcoliamo il centroide per ogni classe
-        for idx, label in enumerate(self._classes):
+        for idx, label in enumerate(self._class_labels):
             self._centroids[idx, :] = np.mean(xtr[ytr == label, :], axis=0)
